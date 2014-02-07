@@ -44,8 +44,8 @@ def get_candidates(sector, rank):
 
 def main():
     for sector in scraperwiki.sql.select("* FROM sectors"):
-        #get_candidates(sector['code'], '1')
-        #get_candidates(sector['code'], '2')
+        get_candidates(sector['code'], '1')
+        get_candidates(sector['code'], '2')
         print('%s DONE!' % sector['name'])
 
 main()
