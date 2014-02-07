@@ -2,13 +2,12 @@
 
 import scraperwiki
 import requests
-
-from lxml.html import fromstring
+import lxml.html
 
 
 html = requests.get("http://abilitazione.miur.it/public/pubblicarisultati.php")
 
-root = fromstring(html.text)
+dom = lxml.html.fromstring(html)
 for sec in root.cssselect("#settore option"):
     print(sec.value)
 
