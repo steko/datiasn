@@ -9,7 +9,7 @@ html = requests.get("http://abilitazione.miur.it/public/pubblicarisultati.php").
 
 dom = lxml.html.fromstring(html)
 for sec in dom.cssselect("#frmCercaId select option"):
-    print(sec.get('value'))
+        print('%s %s' % (sec.get('value'), sec.text_content()))
 
 # retrieve list of sectors
 
