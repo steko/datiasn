@@ -7,13 +7,13 @@ import lxml.html
 
 html = requests.get("http://abilitazione.miur.it/public/pubblicarisultati.php").content
 
+# retrieve list of sectors from home page
+
 dom = lxml.html.fromstring(html)
 for sec in dom.cssselect("#frmCercaId select option"):
-        print('%s %s' % (sec.get('value'), sec.text_content()))
-
-# retrieve list of sectors
-
-
+        sector = {'code': sec.get('value'), 'name': sec.text_content()}
+        if sector['code'] is not in ['1', '2']:
+            scraperwiki.sql.save(['code', 'name'], sector, table_name="sectors")
 
 # for each list, retrieve single items (id, name, indicators URL, CV PDF, assessment PDF, yes/no)
 
