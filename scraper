@@ -3,8 +3,22 @@
 import scraperwiki
 import requests
 
+from lxml.html import fromstring
+
+
 html = requests.get("http://abilitazione.miur.it/public/pubblicarisultati.php")
-print html.content
+
+root = fromstring(html.text)
+for sec in root.cssselect("#settore option"):
+    print(sec.value)
+
+# retrieve list of sectors
+
+
+
+# for each list, retrieve single items (id, name, indicators URL, CV PDF, assessment PDF, yes/no)
+
+
 
 # Saving data:
 # unique_keys = [ 'id' ]
