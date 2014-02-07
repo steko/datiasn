@@ -48,7 +48,4 @@ def main():
         #get_candidates(sector['code'], '2')
         print('%s DONE!')
 
-# Saving data:
-# unique_keys = [ 'id' ]
-# data = { 'id':12, 'name':'violet', 'age':7 }
-# scraperwiki.sql.save(unique_keys, data)
+main()
