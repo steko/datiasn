@@ -29,7 +29,9 @@ def get_candidates(sector, rank):
     dom = lxml.html.fromstring(html)
     for c in dom.cssselect("#elencodomande tbody tr"):
         data={
-            'cognome': c.cssselect('td')[0].text_content()
+            'cognome': c.cssselect('td')[0].text_content(),
+            'nome': c.cssselect('td')[1].text_content(),
+            'CV_URL': c.cssselect('td.CV a').get('href')
             }
         print(data)
 
