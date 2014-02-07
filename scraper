@@ -5,7 +5,7 @@ import requests
 import lxml.html
 
 
-html = requests.get("http://abilitazione.miur.it/public/pubblicarisultati.php")
+html = requests.get("http://abilitazione.miur.it/public/pubblicarisultati.php").content
 
 dom = lxml.html.fromstring(html)
 for sec in root.cssselect("#settore option"):
