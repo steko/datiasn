@@ -43,7 +43,7 @@ def get_candidates(sector, rank):
     scraperwiki.sql.save(['id'], store, table_name='candidates')
 
 
-get_candidates('01/A2', '1')
+get_candidates('01/A2', '2')
 
 # Saving data:
 # unique_keys = [ 'id' ]
