@@ -32,8 +32,8 @@ def get_candidates(sector, rank):
             'cognome': c.cssselect('td')[0].text_content(),
             'nome': c.cssselect('td')[1].text_content(),
             'id': c.cssselect('td.CV a')[0].get('href').split('/')[-3],
-            'ppv': c.cssselect('td.PPV')[0].text_content(),
-            'accepted': c.cssselect('td')[-1].text_content()
+            'ppv': c.cssselect('td.PPV')[0].text_content().strip(),
+            'accepted': c.cssselect('td')[-1].text_content().strip()
             }
         print(data)
 
