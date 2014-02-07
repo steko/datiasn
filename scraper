@@ -9,15 +9,31 @@ html = requests.get("http://abilitazione.miur.it/public/pubblicarisultati.php").
 
 # retrieve list of sectors from home page
 
-dom = lxml.html.fromstring(html)
-for sec in dom.cssselect("#frmCercaId select option"):
-        sector = {'code': sec.get('value'), 'name': sec.text_content()}
-        if sector['code'] not in ['1', '2', '']:
-            scraperwiki.sql.save(['code', 'name'], sector, table_name="sectors")
+def get_sectors():
+    '''Retrieve list of sectors.'''
 
-# for each list, retrieve single items (id, name, indicators URL, CV PDF, assessment PDF, yes/no)
+    dom = lxml.html.fromstring(html)
+    for sec in dom.cssselect("#frmCercaId select option"):
+            sector = {'code': sec.get('value'), 'name': sec.text_content()}
+            if sector['code'] not in ['1', '2', '']:
+                scraperwiki.sql.save(['code', 'name'], sector, table_name="sectors")
 
+# for each list, retrieve single candidates (id, name, indicators URL, CV PDF, assessment PDF, yes/no)
 
+def get_candidates(sector):
+    '''Retrieve list of candidates for a sector.'''
+    
+    payload = {'settore': sector, 'fascia': rank}
+    html = requests.post("http://abilitazione.miur.it/public/pubblicarisultati.php", params=payload).content
+    
+    dom = lxml.html.fromstring(html)
+    for c in dom.cssselect("#elencodomande tbody tr"):
+        data={
+            'cognome': c.cssselect('td')[0].text_content()
+            }
+        print(data)
+
+get_candidates('01/A2', '1')
 
 # Saving data:
 # unique_keys = [ 'id' ]
