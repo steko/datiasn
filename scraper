@@ -1,0 +1,12 @@
+#!/usr/bin/env python
+
+import scraperwiki
+import requests
+
+html = requests.get("http://abilitazione.miur.it/public/pubblicarisultati.php")
+print html.content
+
+# Saving data:
+# unique_keys = [ 'id' ]
+# data = { 'id':12, 'name':'violet', 'age':7 }
+# scraperwiki.sql.save(unique_keys, data)
