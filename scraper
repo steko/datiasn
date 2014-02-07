@@ -26,6 +26,7 @@ def get_candidates(sector, rank):
     
     payload = {'settore': sector, 'fascia': rank}
     html = requests.post("http://abilitazione.miur.it/public/pubblicarisultati.php", params=payload).content
+    store = [] # fill memory, not I/O
     
     dom = lxml.html.fromstring(html)
     for c in dom.cssselect("#elencodomande tbody tr"):
@@ -35,8 +36,12 @@ def get_candidates(sector, rank):
             'id': int(c.cssselect('td.CV a')[0].get('href').split('/')[-3]),
             'ppv': int(c.cssselect('td.PPV')[0].text_content().strip()),
             'accepted': True if c.cssselect('td')[-1].text_content().strip() == 'Si' else False # Correct spelling is 'Sì', FFS
+            'sector': sector',
+            'rank': rank,
             }
-        print(data)
+        store.append(data)
+    scraperwiki.sql.save(['id'], store, table_name='candidates')
+
 
 get_candidates('01/A2', '1')
 
