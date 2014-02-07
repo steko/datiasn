@@ -20,7 +20,7 @@ def get_sectors():
 
 # for each list, retrieve single candidates (id, name, indicators URL, CV PDF, assessment PDF, yes/no)
 
-def get_candidates(sector):
+def get_candidates(sector, rank):
     '''Retrieve list of candidates for a sector.'''
     
     payload = {'settore': sector, 'fascia': rank}
