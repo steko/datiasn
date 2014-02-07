@@ -34,7 +34,7 @@ def get_candidates(sector, rank):
             'nome': c.cssselect('td')[1].text_content(),
             'id': int(c.cssselect('td.CV a')[0].get('href').split('/')[-3]),
             'ppv': int(c.cssselect('td.PPV')[0].text_content().strip()),
-            'accepted': True if c.cssselect('td')[-1].text_content().strip() == 'Sì' else False
+            'accepted': True if c.cssselect('td')[-1].text_content().strip() == 'Si' else False # Correct spelling is 'Sì', FFS
             }
         print(data)
 
